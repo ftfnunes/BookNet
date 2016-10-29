@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_tela_anuncio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ftfnunes.booknet.telaAnuncio"
+    tools:showIn="@layout/app_bar_tela_anuncio">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="26dp"
+            android:id="@+id/nomeLivroAnuncio"
+            android:hint="Nome do livro"
+            android:layout_below="@+id/botaoMenuAnunciar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/spinner"
+            android:layout_below="@+id/autorLivroAnuncio"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:id="@+id/autorLivroAnuncio"
+            android:hint="Autor"
+            android:layout_below="@+id/nomeLivroAnuncio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:text="Tirar foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="162dp"
+            android:id="@+id/botaoTirarFotoAnuncio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:text="Escolher foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/botaoEscolherFoto"
+            android:layout_marginTop="60dp"
+            android:layout_alignTop="@+id/botaoTirarFotoAnuncio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/holo_red_dark" />
+
+        <Button
+            android:text="Enviar Anuncio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/botaoEnviarAnuncio"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/holo_green_dark" />
+    </RelativeLayout>
+
+</RelativeLayout>

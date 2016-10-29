@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/men_lat_inicio"
+            android:icon="@drawable/ic_brightness_init"
+            android:title="Início" />
+        <item
+            android:id="@+id/men_lat_not"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Notificações" />
+        <item
+            android:id="@+id/men_lat_myprof"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Meu Perfil" />
+        <item
+            android:id="@+id/men_lat_hist"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Histórico" />
+        <item
+            android:id="@+id/men_lat_solic"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Solicitações" />
+        <item
+            android:id="@+id/men_lat_chat"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Chat" />
+        <item
+            android:id="@+id/men_lat_sair"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Sair" />
+    </group>
+
+</menu>

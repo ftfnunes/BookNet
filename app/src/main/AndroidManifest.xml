@@ -17,9 +17,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telaInicio" />
         <activity android:name=".telaLogin" />
-        <activity android:name=".telaAnuncio"></activity>
+        <activity
+            android:name=".MenuLateral"
+            android:label="@string/title_activity_menu_lateral"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telaInicio"
+            android:label="@string/title_activity_tela_inicio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telaAnuncio"
+            android:label="@string/title_activity_tela_anuncio"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
