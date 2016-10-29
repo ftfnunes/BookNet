@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="BookNetBackend-android-endpoints">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/BookNetBackend/build/libs/BookNetBackend-android-endpoints.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
