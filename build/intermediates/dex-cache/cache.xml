@@ -48,21 +48,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/fabio/git/BookNet/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5f9249ec54ae6c01348b3a8547167e71384bb2d1">
+        <dex dex="/home/fabio/git/BookNet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2eea2e8bf76ed5e4210770c1ad92adf26f3684c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
         <dex dex="/home/fabio/git/BookNet/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_f4d1e0282d3250e671b667f99dd5e45c9872be05/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/fabio/git/BookNet/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="38338c7c1e5d0a42046c87c03da583a5a0aa276e">
-        <dex dex="/home/fabio/git/BookNet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2eea2e8bf76ed5e4210770c1ad92adf26f3684c6/classes.dex" />
     </item>
     <item
         is-multidex="true"

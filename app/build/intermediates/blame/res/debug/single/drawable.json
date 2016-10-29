@@ -156,6 +156,10 @@
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable/notification_bg_low.xml"
     },
     {
+        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/drawable/side_nav_bar.xml",
+        "source": "/home/fabio/git/BookNet/app/src/main/res/drawable/side_nav_bar.xml"
+    },
+    {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
     },

@@ -1,26 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_tela_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.example.ftfnunes.booknet.telaLogin">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ftfnunes.booknet.telaLogin"
+    tools:showIn="@layout/activity_tela_login">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/campoLogin"
+        android:layout_centerVertical="true"
+        android:hint="Login"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/campoSenha"
+        android:layout_below="@+id/campoLogin"
+        android:layout_marginTop="12dp"
+        android:hint="Senha"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
-    </android.support.design.widget.AppBarLayout>
+    <Button
+        android:text="Entrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botaoEntrarLogin"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/campoSenha"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textColorLink="@android:color/holo_purple"
+        android:textColorHint="?android:attr/colorPrimary"
+        android:textColor="?android:attr/colorEdgeEffect"
+        android:textColorHighlight="@android:color/holo_blue_dark"
+        android:textCursorDrawable="@color/colorPrimary"
+        android:background="@android:color/holo_purple"
+        android:onClick="doSomething" />
 
-    <include layout="@layout/content_tela_login" />
+    <Button
+        android:text="Registrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/botaoRegistrarLogin"
+        android:layout_below="@+id/botaoEntrarLogin"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <ImageButton
+        app:srcCompat="@android:drawable/ic_lock_power_off"
+        android:id="@+id/imageButton"
+        android:visibility="visible"
+        android:layout_width="172px"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="100px" />
+</RelativeLayout>

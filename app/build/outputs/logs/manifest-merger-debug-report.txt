@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:2:1-31:12
+ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:2:1-25:12
 	package
 		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:3:5-43
 		INJECTED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml
@@ -18,7 +18,7 @@ ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:7:5-29:19
+ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:7:5-23:19
 MERGED from [com.android.support:design:25.0.0] /home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:25.0.0] /home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-compat:25.0.0] /home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/AndroidManifest.xml:25:5-20
@@ -55,22 +55,18 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:17:17-77
 	android:name
 		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:17:27-74
+activity#com.example.ftfnunes.booknet.telaInicio
+ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:20:9-48
+	android:name
+		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:20:19-45
 activity#com.example.ftfnunes.booknet.telaLogin
-ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:20:9-28:20
-	android:label
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:22:13-62
-	android:parentActivityName
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:23:13-55
-	android:theme
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:24:13-56
+ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:21:9-47
 	android:name
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:21:13-38
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:25:13-27:77
-	android:value
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:27:17-74
+		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:21:19-44
+activity#com.example.ftfnunes.booknet.telaAnuncio
+ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:22:9-58
 	android:name
-		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:26:17-63
+		ADDED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml:22:19-46
 uses-sdk
 INJECTED from /home/fabio/git/BookNet/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:25.0.0] /home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/AndroidManifest.xml:21:5-23:62

@@ -8,20 +8,24 @@
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/select_dialog_item_material.xml"
     },
     {
-        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
-        "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/abc_action_mode_bar.xml"
     },
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/notification_media_cancel_action.xml"
     },
     {
-        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
-        "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/abc_action_mode_bar.xml"
+        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/activity_tela_anuncio.xml",
+        "source": "/home/fabio/git/BookNet/app/src/main/res/layout/activity_tela_anuncio.xml"
     },
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
@@ -98,10 +102,6 @@
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/notification_template_media_custom.xml",
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/notification_template_media_custom.xml"
-    },
-    {
-        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/content_tela_login.xml",
-        "source": "/home/fabio/git/BookNet/app/src/main/res/layout/content_tela_login.xml"
     },
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
@@ -238,6 +238,10 @@
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
         "source": "/home/fabio/git/BookNet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/activity_tela_inicio.xml",
+        "source": "/home/fabio/git/BookNet/app/src/main/res/layout/activity_tela_inicio.xml"
     },
     {
         "merged": "/home/fabio/git/BookNet/app/build/intermediates/res/merged/debug/layout/activity_tela_login.xml",
