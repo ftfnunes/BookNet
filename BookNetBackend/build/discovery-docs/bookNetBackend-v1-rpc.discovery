@@ -1,0 +1,328 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/74DngdoLJKZeHtBsc-QeEKl1eaw\"",
+ "discoveryVersion": "v1",
+ "id": "bookNetBackend:v1",
+ "name": "bookNetBackend",
+ "version": "v1",
+ "description": "API para gerenciar os acessos aos objetos de emprestimo, usuarios e anuncios",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://myApplicationId.appspot.com/_ah/api/",
+ "rpcUrl": "https://myApplicationId.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "Anuncio": {
+   "id": "Anuncio",
+   "type": "object",
+   "properties": {
+    "autor": {
+     "type": "string"
+    },
+    "descricao": {
+     "type": "string"
+    },
+    "edicao": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "genero": {
+     "type": "string"
+    },
+    "nomeDoLivro": {
+     "type": "string"
+    }
+   }
+  },
+  "AnuncioCollection": {
+   "id": "AnuncioCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Anuncio"
+     }
+    }
+   }
+  },
+  "Emprestimo": {
+   "id": "Emprestimo",
+   "type": "object"
+  },
+  "EmprestimoCollection": {
+   "id": "EmprestimoCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Emprestimo"
+     }
+    }
+   }
+  },
+  "Usuario": {
+   "id": "Usuario",
+   "type": "object",
+   "properties": {
+    "avaliacao": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "emprestimosFeitos": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "nome": {
+     "type": "string"
+    },
+    "userName": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "bookNetBackend.addAnuncio": {
+   "id": "bookNetBackend.addAnuncio",
+   "parameters": {
+    "resource": {
+     "$ref": "Anuncio"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Anuncio"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.addEmprestimo": {
+   "id": "bookNetBackend.addEmprestimo",
+   "parameters": {
+    "resource": {
+     "$ref": "Emprestimo"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Emprestimo"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.addUsuario": {
+   "id": "bookNetBackend.addUsuario",
+   "parameters": {
+    "resource": {
+     "$ref": "Usuario"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Usuario"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.bookNetBackend.init": {
+   "id": "bookNetBackend.bookNetBackend.init",
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.getUsuario": {
+   "id": "bookNetBackend.getUsuario",
+   "parameters": {
+    "userName": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "userName"
+   ],
+   "returns": {
+    "$ref": "Usuario"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listEmpPorAnun": {
+   "id": "bookNetBackend.listEmpPorAnun",
+   "parameters": {
+    "anunciante": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "anunciante"
+   ],
+   "returns": {
+    "$ref": "EmprestimoCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listEmpPorInt": {
+   "id": "bookNetBackend.listEmpPorInt",
+   "parameters": {
+    "interessado": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "interessado"
+   ],
+   "returns": {
+    "$ref": "EmprestimoCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listPorAnunciante": {
+   "id": "bookNetBackend.listPorAnunciante",
+   "parameters": {
+    "userName": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "userName"
+   ],
+   "returns": {
+    "$ref": "AnuncioCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listPorAutor": {
+   "id": "bookNetBackend.listPorAutor",
+   "parameters": {
+    "autor": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "autor"
+   ],
+   "returns": {
+    "$ref": "AnuncioCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listPorGenero": {
+   "id": "bookNetBackend.listPorGenero",
+   "parameters": {
+    "genero": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "genero"
+   ],
+   "returns": {
+    "$ref": "AnuncioCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "bookNetBackend.listPorTitulo": {
+   "id": "bookNetBackend.listPorTitulo",
+   "parameters": {
+    "titulo": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "titulo"
+   ],
+   "returns": {
+    "$ref": "AnuncioCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

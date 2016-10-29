@@ -1,0 +1,32 @@
+2016/10/29-11:35:27.910 22817 Reusing MANIFEST /home/ftfnunes/AndroidStudioProjects/BookNet/test/Default/Session Storage/MANIFEST-000001
+2016/10/29-11:37:07.827 23576 Level-0 table #5: started
+2016/10/29-11:37:07.835 23576 Level-0 table #5: 218769 bytes OK
+2016/10/29-11:37:07.837 23576 Delete type=0 #3
+2016/10/29-11:39:58.176 23576 Level-0 table #7: started
+2016/10/29-11:39:58.188 23576 Level-0 table #7: 116736 bytes OK
+2016/10/29-11:39:58.193 23576 Delete type=0 #4
+2016/10/29-12:34:45.420 23576 Level-0 table #9: started
+2016/10/29-12:34:45.429 23576 Level-0 table #9: 43390 bytes OK
+2016/10/29-12:34:45.433 23576 Delete type=0 #6
+2016/10/29-12:36:25.709 23576 Level-0 table #11: started
+2016/10/29-12:36:25.721 23576 Level-0 table #11: 70903 bytes OK
+2016/10/29-12:36:25.724 23576 Delete type=0 #8
+2016/10/29-12:36:55.319 23576 Level-0 table #13: started
+2016/10/29-12:36:55.331 23576 Level-0 table #13: 92642 bytes OK
+2016/10/29-12:36:55.348 23576 Delete type=0 #10
+2016/10/29-12:37:58.286 23576 Level-0 table #15: started
+2016/10/29-12:37:58.294 23576 Level-0 table #15: 94108 bytes OK
+2016/10/29-12:37:58.296 23576 Delete type=0 #12
+2016/10/29-13:01:13.007 23576 Level-0 table #17: started
+2016/10/29-13:01:13.012 23576 Level-0 table #17: 44378 bytes OK
+2016/10/29-13:01:13.013 23576 Delete type=0 #14
+2016/10/29-13:01:13.013 23576 Compacting 4@0 + 2@1 files
+2016/10/29-13:01:13.028 23576 Generated table #18@0: 267 keys, 461364 bytes
+2016/10/29-13:01:13.028 23576 Compacted 4@0 + 2@1 files => 461364 bytes
+2016/10/29-13:01:13.033 23576 compacted to: files[ 0 1 1 0 0 0 0 ]
+2016/10/29-13:01:13.033 23576 Delete type=2 #7
+2016/10/29-13:01:13.033 23576 Delete type=2 #11
+2016/10/29-13:01:13.033 23576 Delete type=2 #15
+2016/10/29-13:01:13.033 23576 Delete type=2 #13
+2016/10/29-13:01:13.033 23576 Delete type=2 #9
+2016/10/29-13:01:13.033 23576 Delete type=2 #17
