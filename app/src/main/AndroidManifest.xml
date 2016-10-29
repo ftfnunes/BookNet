@@ -17,6 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".telaInicio" />
+        <activity android:name=".telaLogin" />
+        <activity android:name=".telaAnuncio"></activity>
     </application>
 
 </manifest>
