@@ -18,18 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".telaLogin" />
-        <activity
-            android:name=".MenuLateral"
-            android:label="@string/title_activity_menu_lateral"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".telaInicio"
-            android:label="@string/title_activity_tela_inicio"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".telaAnuncio"
-            android:label="@string/title_activity_tela_anuncio"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".telaAnuncio" />
+        <activity android:name=".SelecaoBusca"></activity>
     </application>
 
 </manifest>
