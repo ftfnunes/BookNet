@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".telaInicio" />
         <activity android:name=".telaLogin" />
-        <activity android:name=".telaAnuncio"></activity>
+        <activity android:name=".telaAnuncio" />
+        <activity android:name=".SelecaoBusca"></activity>
     </application>
 
 </manifest>
