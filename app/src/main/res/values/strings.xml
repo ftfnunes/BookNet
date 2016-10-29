@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BookNet</string>
+    <string name="title_activity_tela_login">telaLogin</string>
 </resources>
