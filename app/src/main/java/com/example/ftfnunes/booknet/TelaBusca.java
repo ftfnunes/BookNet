@@ -1,9 +1,11 @@
 package com.example.ftfnunes.booknet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.appspot.myapplicationid.bookNetBackend.model.Anuncio;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaBusca extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +35,12 @@ public class TelaBusca extends AppCompatActivity
         setContentView(R.layout.activity_tela_busca2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ArrayList<Anuncio> anuncios = new ArrayList<Anuncio>();
+
+        ListView listView = (ListView)findViewById(R.id.anunciosList);
+        AnunciosAdpter adapter = new AnunciosAdpter(this, anuncios);
+        listView.setAdapter(adapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -52,7 +70,7 @@ public class TelaBusca extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected (MenuItem item){
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -68,7 +86,7 @@ public class TelaBusca extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected (MenuItem item){
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -96,3 +114,32 @@ public class TelaBusca extends AppCompatActivity
         return true;
     }
 }
+
+class AnunciosAdpter extends ArrayAdapter<Anuncio> {
+
+    private Context context;
+    private List<Anuncio> anuncios = null;
+
+    public AnunciosAdpter(Context context, List<Anuncio> anuncios) {
+        super(context,0, anuncios);
+        this.anuncios = anuncios;
+        this.context = context;
+    }
+
+    @Override
+    public View getView(int position, View view, ViewGroup parent) {
+        Anuncio anuncio = anuncios.get(position);
+
+        if(view == null)
+            view = LayoutInflater.from(context).inflate(R.layout.list_layout, null);
+
+        TextView textViewNomeZombie = (TextView) view.findViewById(R.id.textTituloList);
+        textViewNomeZombie.setText(anuncio.getNomeDoLivro());
+
+        TextView textViewIdade = (TextView)view.findViewById(R.id.textAutorList);
+        textViewIdade.setText(anuncio.getAutor());
+        return view;
+    }
+}
+
+

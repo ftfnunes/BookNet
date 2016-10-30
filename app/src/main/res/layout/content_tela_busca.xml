@@ -14,32 +14,44 @@
     tools:showIn="@layout/app_bar_tela_busca">
 
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_below="@+id/imageButton4"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:id="@+id/anunciosList" />
+
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:text="Titulo"
         android:ems="10"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:id="@+id/editText"
-        android:layout_marginStart="43dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@+id/imageButton4"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="17dp" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@mipmap/filter"
+        android:background="@android:color/transparent"
+        android:id="@+id/imageButton2"
+        android:layout_marginEnd="22dp"
+        android:layout_alignTop="@+id/editText"
+        android:layout_toStartOf="@+id/imageButton4" />
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:layout_height="50dp"
+        app:srcCompat="@mipmap/search"
         android:id="@+id/imageButton4"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_toEndOf="@+id/editText" />
+
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="14dp"
+        android:layout_alignTop="@+id/imageButton2"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
