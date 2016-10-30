@@ -20,6 +20,8 @@
         <activity android:name=".telaLogin" />
         <activity android:name=".telaAnuncio" />
         <activity android:name=".SelecaoBusca" />
+        <activity android:name=".LivroEmprestado" />
+        <activity android:name=".AprovacaoDeSolicitacao" />
         <activity android:name=".telaInicio" />
         <activity
             android:name=".TelaBusca"
