@@ -18,4 +18,9 @@ public class telaLogin extends Activity {
         startActivity(it);
     }
 
+    public void registro(View v){
+        Intent it = new Intent(this, TelaRegistro.class);
+        startActivity(it);
+    }
+
 }
