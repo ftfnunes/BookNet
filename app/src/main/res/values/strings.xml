@@ -10,4 +10,6 @@
     <string name="title_activity_menu_lateral">MenuLateral</string>
     <string name="title_activity_tela_inicio">telaInicio</string>
     <string name="title_activity_tela_anuncio">telaAnuncio</string>
+    <string name="title_activity_tela_busca">TelaBusca</string>
+    <string name="title_activity_tela_atividades">TelaAtividades</string>
 </resources>
