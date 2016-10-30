@@ -1,10 +1,12 @@
 package com.example.ftfnunes.booknet;
 
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,17 +19,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
 import com.appspot.myapplicationid.bookNetBackend.model.Anuncio;
+import com.appspot.myapplicationid.bookNetBackend.model.AnuncioCollection;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.json.gson.GsonFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TelaBusca extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    String selectedFilter = "Titulo";
+    ListView anunciosView;
+    EditText searchText;
+    public static int GET_FILTER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +49,26 @@ public class TelaBusca extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayList<Anuncio> anuncios = new ArrayList<Anuncio>();
+        searchText = (EditText)findViewById(R.id.editText);
+        anunciosView = (ListView)findViewById(R.id.anunciosList);
 
-        ListView listView = (ListView)findViewById(R.id.anunciosList);
-        AnunciosAdpter adapter = new AnunciosAdpter(this, anuncios);
-        listView.setAdapter(adapter);
+        ImageButton searchButton = (ImageButton)findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Codigo para procura no banco e preenchimento da listview vem aqui*/
+                new RecuperaAnunciosAsync(TelaBusca.this).execute(searchText.getText().toString());
+            }
+        });
+
+        ImageButton filterButton = (ImageButton)findViewById(R.id.filterButton);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filterIntent = new Intent(TelaBusca.this, TelaFiltro.class);
+                startActivityForResult(filterIntent, GET_FILTER);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,6 +78,14 @@ public class TelaBusca extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            selectedFilter = data.getStringExtra("SELECTED_FILTER");
+        }
     }
 
     @Override
@@ -113,6 +149,63 @@ public class TelaBusca extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private class RecuperaAnunciosAsync extends AsyncTask<String, Void, List<Anuncio>> {
+        Context context;
+        private ProgressDialog pd;
+
+
+        public RecuperaAnunciosAsync(Context context) {
+            this.context = context;
+        }
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("Buscando Avaliacões..."); /* Tal mensagem é exibida enquanto a busca no banco de dados é realizada.*/
+            pd.show();
+        }
+
+
+        protected List<Anuncio> doInBackground(String... filtro) {
+            /* São criadas Colection de avaliações e correções para armazenar o resultado das buscas n banco de dados.*/
+            AnuncioCollection resultadoAnuncios = new AnuncioCollection();
+            /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
+            List<Object> resultado = new ArrayList<>();
+            try{
+                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+                BookNetBackend service =  builder.build();
+                switch (TelaBusca.this.selectedFilter){
+                    case "Titulo":
+                        resultadoAnuncios = service.listPorTitulo(filtro[0] != null ? filtro[0] : "").execute();
+                        break;
+                    case "Autor":
+                        resultadoAnuncios = service.listPorAutor(filtro[0] != null ? filtro[0] : "").execute();
+                        break;
+                    case "Genero":
+                        resultadoAnuncios = service.listPorGenero(filtro[0] != null ? filtro[0] : "").execute();
+                        break;
+                    default:
+                        resultadoAnuncios = service.listPorTitulo(filtro[0] != null ? filtro[0] : "").execute();
+                        break;
+                }
+                resultadoAnuncios = service.listPorAnunciante(filtro[0] != null ? filtro[0] : "").execute();
+            }
+            catch(Exception ex){
+                /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
+                Log.d("Erro ao salvar", ex.getMessage(), ex);
+            }
+            return resultadoAnuncios.isEmpty() ? new ArrayList<Anuncio>() : resultadoAnuncios.getItems();
+        }
+
+
+        @Override
+        protected void onPostExecute(final List<Anuncio> anuncios) {
+            AnunciosAdpter adapter = new AnunciosAdpter(TelaBusca.this, anuncios);
+            TelaBusca.this.anunciosView.setAdapter(adapter);
+            pd.dismiss();
+
+        }
+    }
 }
 
 class AnunciosAdpter extends ArrayAdapter<Anuncio> {
@@ -140,6 +233,8 @@ class AnunciosAdpter extends ArrayAdapter<Anuncio> {
         textViewIdade.setText(anuncio.getAutor());
         return view;
     }
+
+
 }
 
 

@@ -35,6 +35,7 @@
             android:name=".TelaRegistro"
             android:label="@string/title_activity_tela_registro"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".TelaFiltro"></activity>
     </application>
 
 </manifest>

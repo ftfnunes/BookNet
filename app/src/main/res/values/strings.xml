@@ -13,4 +13,5 @@
     <string name="title_activity_tela_busca">TelaBusca</string>
     <string name="title_activity_tela_atividades">TelaAtividades</string>
     <string name="title_activity_tela_registro">BookNet</string>
+    <string name="title_activity_tela_filtro">TelaFiltro</string>
 </resources>

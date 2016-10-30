@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+    <Space android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+    <TextView
+        android:text="Selecione o Filtro"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:id="@+id/textView3" />
+
+    <Space android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" >
+
+        <Space android:layout_width="50dp"
+            android:layout_height="300dp"/>
+        <RadioGroup android:id="@+id/filterRadioGroup"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+            <RadioButton
+                android:text="Titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioTitulo"
+                android:layout_weight="1" />
+            android:layout_weight="1" />
+
+            <RadioButton
+                android:text="Autor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioAutor"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="Genero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGenero"
+                android:layout_weight="1" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:text="Selecionar"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/filterSelectionButton" />>
+</LinearLayout>
