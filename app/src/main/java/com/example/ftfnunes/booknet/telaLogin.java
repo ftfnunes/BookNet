@@ -14,7 +14,7 @@ public class telaLogin extends Activity {
     }
 
     public void doSomething(View v){
-        Intent it = new Intent(telaLogin.this, telaInicio.class);
+        Intent it = new Intent(this, telaInicio.class);
         startActivity(it);
     }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+
+    <TextView
+        android:id="@+id/textAutor"
+        android:layout_width="270dp"
+        android:layout_height="26dip"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textTitulo" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        app:srcCompat="@drawable/ic_menu_camera"
+        android:id="@+id/imageLivro"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textTitulo"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="Example application"
+        android:textSize="16sp"
+        android:layout_marginStart="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageLivro" />
+
+</RelativeLayout>
