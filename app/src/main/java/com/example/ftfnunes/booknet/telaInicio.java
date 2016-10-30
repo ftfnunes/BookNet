@@ -97,7 +97,7 @@ public class telaInicio extends AppCompatActivity
 
     public void setTelaProcurar(View v){
         /* Lembrar de trocar MainActivity para a tela desejada. */
-        Intent it = new Intent(telaInicio.this, telaLogin.class);
+        Intent it = new Intent(telaInicio.this, TelaBusca.class);
         startActivity(it);
     }
 }
