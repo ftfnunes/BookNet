@@ -13,7 +13,7 @@ public class telaLogin extends Activity {
         setContentView(R.layout.activity_tela_login);
     }
 
-    public void doSomething(View v){
+    public void login(View v){
         Intent it = new Intent(this, telaInicio.class);
         startActivity(it);
     }

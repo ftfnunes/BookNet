@@ -51,7 +51,7 @@
         android:textColorHighlight="@android:color/holo_blue_dark"
         android:textCursorDrawable="@color/colorPrimary"
         android:background="@android:color/holo_purple"
-        android:onClick="doSomething" />
+        android:onClick="login" />
 
     <Button
         android:text="Registrar"

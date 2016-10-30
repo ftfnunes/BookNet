@@ -1,6 +1,7 @@
 package com.example.ftfnunes.booknet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -90,7 +91,8 @@ public class TelaBusca extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.men_lat_inicio) {
-            // Handle the camera action
+            Intent it = new Intent(this, telaInicio.class);
+            startActivity(it);
         } else if (id == R.id.men_lat_chat) {
 
         } else if (id == R.id.men_lat_hist) {
@@ -100,9 +102,11 @@ public class TelaBusca extends AppCompatActivity
         } else if (id == R.id.men_lat_not) {
 
         } else if (id == R.id.men_lat_solic) {
-
+            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
+            startActivity(it);
         } else if (id == R.id.men_lat_sair) {
-
+            Intent it = new Intent(this, telaLogin.class);
+            startActivity(it);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
