@@ -50,8 +50,7 @@
         android:textColor="?android:attr/colorEdgeEffect"
         android:textColorHighlight="@android:color/holo_blue_dark"
         android:textCursorDrawable="@color/colorPrimary"
-        android:background="@android:color/holo_purple"
-        android:onClick="login" />
+        android:background="@android:color/holo_purple" />
 
     <Button
         android:text="Registrar"
