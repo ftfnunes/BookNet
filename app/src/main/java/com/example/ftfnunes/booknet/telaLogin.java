@@ -91,7 +91,7 @@ public class telaLogin extends Activity {
         protected Usuario doInBackground(String... username) {
 
             try {
-                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null)
                         .setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
                 BookNetBackend service = builder.build();
                 user = service.getUsuario(username[0]).execute();

@@ -15,4 +15,45 @@ public class Emprestimo {
     @Index Usuario interessado;
     @Index Anuncio anuncio;
     Status status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Usuario getAnunciante() {
+        return anunciante;
+    }
+
+    public void setAnunciante(Usuario anunciante) {
+        this.anunciante = anunciante;
+    }
+
+    public Usuario getInteressado() {
+        return interessado;
+    }
+
+    public void setInteressado(Usuario interessado) {
+        this.interessado = interessado;
+    }
+
+    public Anuncio getAnuncio() {
+        return anuncio;
+    }
+
+    public void setAnuncio(Anuncio anuncio) {
+        this.anuncio = anuncio;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
 }

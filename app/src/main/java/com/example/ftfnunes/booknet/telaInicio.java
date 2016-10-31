@@ -109,12 +109,14 @@ public class telaInicio extends AppCompatActivity
     public void setTelaAnunciar(View v){
         /* Lembrar de trocar MainActivity para a tela desejada. */
         Intent it = new Intent(telaInicio.this, telaAnuncio.class);
-        startActivity(it);
+        de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
+        startActivityForResult(it, 0);
     }
 
     public void setTelaProcurar(View v){
         /* Lembrar de trocar MainActivity para a tela desejada. */
         Intent it = new Intent(telaInicio.this, TelaBusca.class);
-        startActivity(it);
+        de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
+        startActivityForResult(it, 0);
     }
 }

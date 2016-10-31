@@ -31,6 +31,5 @@ dependencies {
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile 'com.google.http-client:google-http-client-gson:1.19.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/gson-2.1.jar')
     compile files('libs/eventbus-3.0.0-beta1.jar')
 }

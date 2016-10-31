@@ -21,6 +21,15 @@ public class Anuncio {
     String descricao;
     @Index Usuario anunciante;
 
+
+    public Usuario getAnunciante() {
+        return anunciante;
+    }
+
+    public void setAnunciante(Usuario anunciante) {
+        this.anunciante = anunciante;
+    }
+
     public String getGenero() {
         return genero;
     }

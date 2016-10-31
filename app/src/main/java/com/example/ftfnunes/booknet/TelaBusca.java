@@ -173,6 +173,7 @@ public class TelaBusca extends AppCompatActivity
 
             try{
                 BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+                builder.setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
                 BookNetBackend service =  builder.build();
                 switch (TelaBusca.this.selectedFilter){
                     case "Titulo":
@@ -188,23 +189,25 @@ public class TelaBusca extends AppCompatActivity
                         resultadoAnuncios = service.listPorTitulo(filtro[0] != null ? filtro[0] : "").execute();
                         break;
                 }
-                resultadoAnuncios = service.listPorAnunciante(filtro[0] != null ? filtro[0] : "").execute();
             }
             catch(Exception ex){
                 /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
                 Log.d("Erro ao salvar", ex.getMessage(), ex);
             }
-            return resultadoAnuncios.isEmpty() ? new ArrayList<Anuncio>() : resultadoAnuncios.getItems();
+            return resultadoAnuncios.getItems();
         }
 
 
         @Override
         protected void onPostExecute(final List<Anuncio> anuncios) {
-            AnunciosAdpter adapter = new AnunciosAdpter(TelaBusca.this, anuncios);
-            TelaBusca.this.anunciosView.setAdapter(adapter);
-            pd.dismiss();
+            if(anuncios != null) {
+                AnunciosAdpter adapter = new AnunciosAdpter(TelaBusca.this, anuncios);
+                TelaBusca.this.anunciosView.setAdapter(adapter);
+            }
+            else
+                Toast.makeText(getApplicationContext(),"Nenhum Resultado Encontrado",Toast.LENGTH_SHORT).show();
 
-        }
+            pd.dismiss(); }
     }
 }
 
