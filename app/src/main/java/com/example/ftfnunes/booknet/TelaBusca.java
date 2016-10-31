@@ -170,7 +170,7 @@ public class TelaBusca extends AppCompatActivity
             /* São criadas Colection de avaliações e correções para armazenar o resultado das buscas n banco de dados.*/
             AnuncioCollection resultadoAnuncios = new AnuncioCollection();
             /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
-            List<Object> resultado = new ArrayList<>();
+
             try{
                 BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
                 BookNetBackend service =  builder.build();

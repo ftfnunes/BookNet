@@ -18,52 +18,6 @@
         android:layout_height="match_parent">
 
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="26dp"
-            android:id="@+id/nomeLivroAnuncio"
-            android:hint="Nome do livro"
-            android:layout_below="@+id/botaoMenuAnunciar"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="20dp"
-            android:id="@+id/autorLivroAnuncio"
-            android:hint="Autor"
-            android:layout_below="@+id/nomeLivroAnuncio"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:text="Tirar foto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="162dp"
-            android:id="@+id/botaoTirarFotoAnuncio"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:background="@color/colorPrimary" />
-
-        <Button
-            android:text="Escolher foto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/botaoEscolherFoto"
-            android:layout_marginTop="60dp"
-            android:layout_alignTop="@+id/botaoTirarFotoAnuncio"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:background="@android:color/holo_red_dark" />
-
         <Button
             android:text="Enviar Anuncio"
             android:layout_width="wrap_content"
@@ -75,17 +29,88 @@
             android:background="@android:color/holo_green_dark"
             android:onClick="anunciar" />
 
+        <ImageView
+            android:layout_width="80pt"
+            android:editable="true"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imageView2"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/botaoTirarFotoAnuncio"
+            android:layout_alignBottom="@+id/botaoEscolherFoto" />
+
+        <Button
+            android:text="Escolher foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/botaoEscolherFoto"
+            android:background="@android:color/holo_red_dark"
+            android:layout_above="@+id/botaoEnviarAnuncio"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="23dp"
+            android:layout_toEndOf="@+id/imageView2" />
+
+        <Button
+            android:text="Tirar foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:id="@+id/botaoTirarFotoAnuncio"
+            android:background="@color/colorPrimary"
+            android:layout_alignBottom="@+id/botaoEscolherFoto"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/imageView2" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:layout_marginTop="19dp"
+            android:id="@+id/nomeLivroAnuncio"
+            android:hint="Nome do livro"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/autorLivroAnuncio"
+            android:hint="Autor"
+            android:layout_below="@+id/nomeLivroAnuncio"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
             android:id="@+id/generoLivroAnuncio"
+            android:hint="Gênero"
             android:layout_below="@+id/autorLivroAnuncio"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:hint="Gênero" />
+            android:layout_marginTop="178dp"
+            android:id="@+id/descLivroAnuncio"
+            android:hint="Descrição" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edicaoLivroAnuncio"
+            android:layout_below="@+id/generoLivroAnuncio"
+            android:layout_alignParentStart="true"
+            android:hint="Edição" />
     </RelativeLayout>
 
 </RelativeLayout>
