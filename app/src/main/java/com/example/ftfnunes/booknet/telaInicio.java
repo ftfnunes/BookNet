@@ -15,10 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
+
+import de.greenrobot.event.EventBus;
+
 public class telaInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView nomeUsuarioHeader, emailUsuarioHeader;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class telaInicio extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        usuario = (Usuario) EventBus.getDefault().removeStickyEvent(Usuario.class);
     }
 
     @Override
@@ -52,9 +59,9 @@ public class telaInicio extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_lateral, menu);
         nomeUsuarioHeader = (TextView) findViewById(R.id.nomeUsuarioHeader);
-        nomeUsuarioHeader.setText("Fabio");
+        nomeUsuarioHeader.setText(usuario.getNome());
         emailUsuarioHeader = (TextView) findViewById(R.id.emailUsuarioHeader);
-        emailUsuarioHeader.setText("fabio@email.com");
+        emailUsuarioHeader.setText(usuario.getUserName());
         return true;
     }
 
