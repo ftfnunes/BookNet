@@ -30,14 +30,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:id="@+id/spinner"
-            android:layout_below="@+id/autorLivroAnuncio"
-            android:layout_alignParentStart="true" />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,6 +74,18 @@
             android:layout_alignParentStart="true"
             android:background="@android:color/holo_green_dark"
             android:onClick="anunciar" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="19dp"
+            android:id="@+id/generoLivroAnuncio"
+            android:layout_below="@+id/autorLivroAnuncio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:hint="Gênero" />
     </RelativeLayout>
 
 </RelativeLayout>

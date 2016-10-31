@@ -18,8 +18,7 @@ import android.widget.EditText;
 public class telaAnuncio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private EditText nomeLivroAnuncio, autorLivroAnuncio;
-    private String nomeLivro, autorLivro;
+    private EditText nomeLivroAnuncio, autorLivroAnuncio, generoLivroAnuncio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +98,17 @@ public class telaAnuncio extends AppCompatActivity
 
     public void anunciar(View v){
         nomeLivroAnuncio = (EditText) findViewById(R.id.nomeLivroAnuncio);
-        nomeLivro = nomeLivroAnuncio.getText().toString();
-
         autorLivroAnuncio = (EditText) findViewById(R.id.autorLivroAnuncio);
-        autorLivro = autorLivroAnuncio.getText().toString();
+        generoLivroAnuncio = (EditText) findViewById(R.id.generoLivroAnuncio);
 
-        /* nomeLivro e autorLivro possuem as Strings desses campos. */
+
+        /* Para utilizar as strings desses campos, basta utilizar:
+        *
+        * Ex.: nomeLivroAnuncio.getText().toString();
+        *
+        * */
+
+
 
     }
 }
