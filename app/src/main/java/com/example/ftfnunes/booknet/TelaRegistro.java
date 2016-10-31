@@ -7,8 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
 public class TelaRegistro extends AppCompatActivity {
+
+    private EditText nomeRegistro, loginRegistro, senhaRegistro, emailRegistro, telRegistro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,18 @@ public class TelaRegistro extends AppCompatActivity {
     }
 
     public void registrar(View v){
+        nomeRegistro = (EditText) findViewById(R.id.nomeRegistro);
+        loginRegistro = (EditText) findViewById(R.id.loginRegistro);
+        senhaRegistro = (EditText) findViewById(R.id.senhaRegistro);
+        emailRegistro = (EditText) findViewById(R.id.emailRegistro);
+        telRegistro = (EditText) findViewById(R.id.telRegistro);
+
+        /* Para utilizar as strings desses campos, basta utilizar:
+        *
+        * Ex.: nomeRegistro.getText().toString();
+        *
+        * */
+
 
         /* Colocar métodos que realizam o registro dos usuários. */
 
