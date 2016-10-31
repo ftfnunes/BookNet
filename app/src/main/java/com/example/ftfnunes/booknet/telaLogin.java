@@ -32,7 +32,7 @@ public class telaLogin extends Activity {
     }
 
     public void registro(View v){
-        Intent it = new Intent(this, TelaRegistro.class);
+        Intent it = new Intent(this, TelaAtividades.class);
         startActivity(it);
     }
 
