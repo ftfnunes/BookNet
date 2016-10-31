@@ -20,8 +20,6 @@
         <activity android:name=".telaLogin" />
         <activity android:name=".telaAnuncio" />
         <activity android:name=".SelecaoBusca" />
-        <activity android:name=".LivroEmprestado" />
-        <activity android:name=".AprovacaoDeSolicitacao" />
         <activity android:name=".telaInicio" />
         <activity
             android:name=".TelaBusca"
@@ -34,8 +32,16 @@
         <activity
             android:name=".TelaRegistro"
             android:label="@string/title_activity_tela_registro"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".TelaFiltro" />
+        <activity
+            android:name=".AprovacaoDeSolicitacao"
+            android:label="@string/title_activity_aprovacao_de_solicitacao"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LivroEmprestado"
+            android:label="@string/title_activity_livro_emprestado"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".TelaFiltro"></activity>
     </application>
 
 </manifest>
