@@ -14,4 +14,6 @@
     <string name="title_activity_tela_atividades">TelaAtividades</string>
     <string name="title_activity_tela_registro">BookNet</string>
     <string name="title_activity_tela_filtro">TelaFiltro</string>
+    <string name="title_activity_aprovacao_de_solicitacao">AprovacaoDeSolicitacao</string>
+    <string name="title_activity_livro_emprestado">LivroEmprestado</string>
 </resources>
