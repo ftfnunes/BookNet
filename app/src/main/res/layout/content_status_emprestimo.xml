@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_aprovacao_de_solicitacao"
+    android:id="@+id/content_status_emprestimo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -10,8 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.ftfnunes.booknet.AprovacaoDeSolicitacao"
-    tools:showIn="@layout/app_bar_aprovacao_de_solicitacao">
+    tools:context="com.example.ftfnunes.booknet.StatusEmprestimo"
+    tools:showIn="@layout/app_bar_status_emprestimo">
 
     <TextView
         android:text="Autor"
@@ -37,7 +37,7 @@
         android:id="@+id/textNomeUsuario"
         android:layout_alignTop="@+id/imageUsuario"
         android:layout_alignStart="@+id/textGenero"
-        android:layout_alignEnd="@+id/buttonRecusar"
+        android:layout_alignEnd="@+id/textStatus"
         android:layout_width="150dp" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:id="@+id/imageUsuario"
         android:layout_height="120dp"
         android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/buttonAceitar" />
+        android:layout_alignStart="@+id/textStatus" />
 
     <TextView
         android:text="Nome Do Livro"
@@ -63,10 +63,10 @@
         android:layout_height="30dp"
         android:id="@+id/TituloText"
         android:layout_alignTop="@+id/imageLivro"
-        android:layout_alignEnd="@+id/buttonRecusar" />
+        android:layout_alignEnd="@+id/textStatus" />
 
     <TextView
-        android:text="Livro Disponibilizado:"
+        android:text="Livro Solicitado:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -74,7 +74,7 @@
         android:id="@+id/textView9" />
 
     <TextView
-        android:text="Usuário que solicitou:"
+        android:text="Usuário que disponibilizou:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
@@ -106,6 +106,14 @@
         android:layout_below="@+id/textTelefone"
         android:layout_toEndOf="@+id/buttonChat" />
 
+    <Button
+        android:text="Verificar Reputação"
+        android:layout_height="35dp"
+        android:id="@+id/buttonReputacao"
+        android:layout_width="180dp"
+        android:layout_below="@+id/ratingBar2"
+        android:layout_centerHorizontal="true" />
+
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,34 +124,24 @@
         android:layout_below="@+id/imageUsuario"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Recusar"
-        android:id="@+id/buttonRecusar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_alignTop="@+id/buttonAceitar"
-        android:layout_alignBottom="@+id/buttonAceitar"
-        android:layout_toEndOf="@+id/buttonAceitar" />
-
-    <Button
-        android:text="Verificar Reputação"
-        android:layout_height="35dp"
-        android:id="@+id/buttonReputacao"
-        android:layout_width="180dp"
-        android:layout_below="@+id/ratingBar2"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="Aceitar"
-        android:layout_height="70dp"
-        android:id="@+id/buttonAceitar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:layout_width="160dp"
-        android:layout_marginStart="17dp"
+    <TextView
+        android:text="PENDENTE"
+        android:layout_width="320dp"
+        android:id="@+id/textStatus"
+        android:elevation="1dp"
+        android:gravity="fill_vertical|center_horizontal"
+        tools:textSize="36sp"
+        android:textColor="@android:color/background_dark"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:text="Status:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/textStatus"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

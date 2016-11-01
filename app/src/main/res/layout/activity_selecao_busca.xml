@@ -33,6 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar"
+        android:isIndicator="true"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_below="@+id/textDesc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />

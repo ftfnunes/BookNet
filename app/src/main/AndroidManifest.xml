@@ -41,6 +41,18 @@
         <activity
             android:name=".LivroEmprestado"
             android:label="@string/title_activity_livro_emprestado"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".telaStatusEmprestimo"
+            android:label="@string/title_activity_tela_status_emprestimo"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StatusEmprestimo"
+            android:label="@string/title_activity_status_emprestimo"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TelaAvaliacao"
+            android:label="@string/title_activity_tela_avaliacao"
             android:theme="@style/AppTheme"></activity>
     </application>
 
