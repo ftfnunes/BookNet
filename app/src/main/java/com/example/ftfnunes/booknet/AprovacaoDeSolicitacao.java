@@ -27,6 +27,8 @@ import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
 
+import java.util.concurrent.ExecutionException;
+
 import de.greenrobot.event.EventBus;
 
 public class AprovacaoDeSolicitacao extends AppCompatActivity
@@ -73,7 +75,13 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 emprestimo.setStatus("Recusado");
-                new SalvaEmprestimoAsync(AprovacaoDeSolicitacao.this).execute(emprestimo);
+                try {
+                    new SalvaEmprestimoAsync(AprovacaoDeSolicitacao.this).execute(emprestimo).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -191,9 +199,11 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
         protected void onPostExecute(Emprestimo emprestimo) {
             Toast.makeText(getApplicationContext(),"Solicitacao de Emprestimo Salva",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
-            finish();
+            intent.putExtra("RESULT_AP", emprestimo.getStatus() == "Recusado" ? "Recusado" : "Aprovado");
+            EventBus.getDefault().postSticky(emprestimo);
+            AprovacaoDeSolicitacao.this.setResult(RESULT_OK, intent);
             pd.dismiss();
-
+            AprovacaoDeSolicitacao.this.finish();
         }
     }
 }

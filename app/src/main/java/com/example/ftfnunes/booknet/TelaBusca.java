@@ -233,7 +233,8 @@ public class TelaBusca extends AppCompatActivity
             else
                 Toast.makeText(getApplicationContext(),"Nenhum Resultado Encontrado",Toast.LENGTH_SHORT).show();
 
-            pd.dismiss(); }
+            pd.dismiss();
+        }
     }
 }
 

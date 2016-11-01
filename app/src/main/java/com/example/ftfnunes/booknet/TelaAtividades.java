@@ -51,6 +51,7 @@ public class TelaAtividades extends AppCompatActivity
     EmprestimosAdapter soliciteiAdapter;
     EmprestimosAdapter disponibilizeiAdapter;
     ListView listView;
+    ArrayList<Emprestimo> disponibilizados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +190,20 @@ public class TelaAtividades extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data.getStringExtra("RESULT_AP").equals("Aprovado")){
+            Emprestimo resultEmprestimo = EventBus.getDefault().removeStickyEvent(Emprestimo.class);
+            for (Emprestimo emprestimo : disponibilizados) {
+                if (emprestimo.getAnuncio().getId() == resultEmprestimo.getAnuncio().getId() && emprestimo.getId() != resultEmprestimo.getId()){
+                    //emprestimo.setStatus("Recusado");
+                    //new SalvaEmprestimoAsync(this).execute(emprestimo);
+                }
+            }
+        }
+    }
+
     private class RecuperaEmprestimosAsync extends AsyncTask<String, Void, List<Object>>{
         Context context;
         private ProgressDialog pd;
@@ -230,16 +245,60 @@ public class TelaAtividades extends AppCompatActivity
             return resultados;
         }
 
-
         @Override
         protected void onPostExecute(final List<Object> resultados) {
             ArrayList<Emprestimo> solicitados = (ArrayList<Emprestimo>) resultados.get(1);
             soliciteiAdapter = new EmprestimosAdapter(TelaAtividades.this, solicitados);
             listView.setAdapter(soliciteiAdapter);
-            ArrayList<Emprestimo> disponibilizados = (ArrayList<Emprestimo>) resultados.get(0);
+            disponibilizados = (ArrayList<Emprestimo>) resultados.get(0);
             disponibilizeiAdapter = new EmprestimosAdapter(TelaAtividades.this, disponibilizados);
 
             pd.dismiss();
+        }
+    }
+
+    private class SalvaEmprestimoAsync extends AsyncTask<Emprestimo, Void, Emprestimo> {
+        Context context;
+        private ProgressDialog pd;
+
+
+
+        public SalvaEmprestimoAsync(Context context) {
+            this.context = context;
+        }
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+            /*pd = new ProgressDialog(context);
+            pd.setMessage("Atualizando solicitacoes..."); *//* Tal mensagem é exibida enquanto a busca no banco de dados é realizada.*//*
+            pd.show();*/
+        }
+
+
+        protected Emprestimo doInBackground(Emprestimo... emprestimo) {
+            /* São criadas Colection de avaliações e correções para armazenar o resultado das buscas n banco de dados.*/
+
+            /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
+            try{
+                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null)
+                        .setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
+                BookNetBackend service =  builder.build();
+
+                return service.addEmprestimo(emprestimo[0]).execute();
+            }
+            catch(Exception ex){
+                /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
+                Log.d("Erro ao salvar", ex.getMessage(), ex);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Emprestimo emprestimo) {
+            Toast.makeText(getApplicationContext(),"Solicitacao de Emprestimo Salva",Toast.LENGTH_SHORT).show();
+            /*pd.dismiss();*/
+
         }
     }
 }
