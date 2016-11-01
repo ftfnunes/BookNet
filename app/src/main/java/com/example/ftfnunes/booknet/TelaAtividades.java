@@ -1,7 +1,10 @@
 package com.example.ftfnunes.booknet;
 
 import android.app.ActionBar;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +22,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
+import com.appspot.myapplicationid.bookNetBackend.model.Anuncio;
+import com.appspot.myapplicationid.bookNetBackend.model.AnuncioCollection;
+import com.appspot.myapplicationid.bookNetBackend.model.Emprestimo;
+import com.appspot.myapplicationid.bookNetBackend.model.EmprestimoCollection;
+import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.json.gson.GsonFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import de.greenrobot.event.EventBus;
 
 public class TelaAtividades extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Usuario usuario;
+    EmprestimosAdapter soliciteiAdapter;
+    EmprestimosAdapter disponibilizeiAdapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +53,9 @@ public class TelaAtividades extends AppCompatActivity
         setContentView(R.layout.activity_tela_atividades);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*Atributos que serao usados pela ASyncTask*/
+        usuario = (Usuario) EventBus.getDefault().getStickyEvent(Usuario.class);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -38,20 +66,20 @@ public class TelaAtividades extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        listView = (ListView)findViewById(R.id.atList);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Solicitei"));
         tabLayout.addTab(tabLayout.newTab().setText("Disponibilizei"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                if(tab.getText().toString() == "Solicitei"){
+                    listView.setAdapter(soliciteiAdapter);
+                }
+                else
+                    listView.setAdapter(disponibilizeiAdapter);
             }
 
             @Override
@@ -64,6 +92,8 @@ public class TelaAtividades extends AppCompatActivity
 
             }
         });
+
+        new RecuperaEmprestimosAsync(this).execute(usuario.getUserName());
     }
 
     @Override
@@ -126,5 +156,59 @@ public class TelaAtividades extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class RecuperaEmprestimosAsync extends AsyncTask<String, Void, List<Object>>{
+        Context context;
+        private ProgressDialog pd;
+
+
+        public RecuperaEmprestimosAsync(Context context) {
+            this.context = context;
+        }
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("Buscando Avaliacões..."); /* Tal mensagem é exibida enquanto a busca no banco de dados é realizada.*/
+            pd.show();
+        }
+
+
+        protected List<Object> doInBackground(String... username) {
+            /* São criadas Colection de emprestimos para armazenar o resultado das buscas n banco de dados.*/
+            EmprestimoCollection emprestimosFeitos = new EmprestimoCollection();
+            EmprestimoCollection emprestimosSolicitados = new EmprestimoCollection();
+            /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
+
+            try{
+                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+                builder.setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
+                BookNetBackend service =  builder.build();
+                emprestimosFeitos = service.listEmpPorAnun(username[0] != null ? username[0] : "").execute();
+                emprestimosSolicitados = service.listEmpPorInt(username[0] != null ? username[0] : "").execute();
+            }
+            catch(Exception ex){
+                /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
+                Log.d("Erro ao salvar", ex.getMessage(), ex);
+            }
+
+            List<Object> resultados = new ArrayList<>();
+            resultados.add(emprestimosFeitos.getItems() == null  ? new ArrayList<Emprestimo>() : emprestimosFeitos.getItems());
+            resultados.add(emprestimosSolicitados.getItems() == null ? new ArrayList<Emprestimo>() : emprestimosSolicitados.getItems());
+            return resultados;
+        }
+
+
+        @Override
+        protected void onPostExecute(final List<Object> resultados) {
+            ArrayList<Emprestimo> solicitados = (ArrayList<Emprestimo>) resultados.get(1);
+            soliciteiAdapter = new EmprestimosAdapter(TelaAtividades.this, solicitados);
+            listView.setAdapter(soliciteiAdapter);
+            ArrayList<Emprestimo> disponibilizados = (ArrayList<Emprestimo>) resultados.get(0);
+            disponibilizeiAdapter = new EmprestimosAdapter(TelaAtividades.this, disponibilizados);
+
+            pd.dismiss();
+        }
     }
 }

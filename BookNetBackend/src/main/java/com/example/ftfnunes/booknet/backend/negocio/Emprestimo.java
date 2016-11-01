@@ -14,7 +14,7 @@ public class Emprestimo {
     @Index Usuario anunciante;
     @Index Usuario interessado;
     @Index Anuncio anuncio;
-    Status status;
+    String status;
 
     public Long getId() {
         return id;
@@ -48,11 +48,11 @@ public class Emprestimo {
         this.anuncio = anuncio;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

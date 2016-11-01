@@ -75,7 +75,7 @@ public class telaAnuncio extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        usuario = (Usuario) EventBus.getDefault().removeStickyEvent(Usuario.class);
+        usuario = (Usuario) EventBus.getDefault().getStickyEvent(Usuario.class);
     }
 
     @Override

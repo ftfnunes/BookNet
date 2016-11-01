@@ -41,7 +41,7 @@ public class telaInicio extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        usuario = (Usuario) EventBus.getDefault().removeStickyEvent(Usuario.class);
+        usuario = (Usuario) EventBus.getDefault().getStickyEvent(Usuario.class);
     }
 
     @Override
@@ -92,7 +92,9 @@ public class telaInicio extends AppCompatActivity
         } else if (id == R.id.men_lat_myprof) {
 
         } else if (id == R.id.men_lat_not) {
-
+            Intent it = new Intent(this, TelaAtividades.class);
+            de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
+            startActivity(it);
         } else if (id == R.id.men_lat_solic) {
             Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
             startActivity(it);
@@ -109,14 +111,12 @@ public class telaInicio extends AppCompatActivity
     public void setTelaAnunciar(View v){
         /* Lembrar de trocar MainActivity para a tela desejada. */
         Intent it = new Intent(telaInicio.this, telaAnuncio.class);
-        de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
         startActivityForResult(it, 0);
     }
 
     public void setTelaProcurar(View v){
         /* Lembrar de trocar MainActivity para a tela desejada. */
         Intent it = new Intent(telaInicio.this, TelaBusca.class);
-        de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
         startActivityForResult(it, 0);
     }
 }

@@ -29,17 +29,21 @@ import android.widget.Toast;
 import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
 import com.appspot.myapplicationid.bookNetBackend.model.Anuncio;
 import com.appspot.myapplicationid.bookNetBackend.model.AnuncioCollection;
+import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 public class TelaBusca extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String selectedFilter = "Titulo";
     ListView anunciosView;
     EditText searchText;
+    Usuario usuario;
     public static int GET_FILTER = 1;
 
     @Override
@@ -51,6 +55,8 @@ public class TelaBusca extends AppCompatActivity
 
         searchText = (EditText)findViewById(R.id.editText);
         anunciosView = (ListView)findViewById(R.id.anunciosList);
+
+        usuario = EventBus.getDefault().getStickyEvent(Usuario.class);
 
         ImageButton searchButton = (ImageButton)findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +207,16 @@ public class TelaBusca extends AppCompatActivity
         @Override
         protected void onPostExecute(final List<Anuncio> anuncios) {
             if(anuncios != null) {
-                AnunciosAdpter adapter = new AnunciosAdpter(TelaBusca.this, anuncios);
+                ArrayList<Anuncio> filteredList = new ArrayList<>();
+                for(Anuncio anuncio : anuncios){
+                    if(!anuncio.getAnunciante().getUserName().equals(usuario.getUserName())){
+                        filteredList.add(anuncio);
+                    }
+                }
+                if(filteredList.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Nenhum Resultado Encontrado",Toast.LENGTH_SHORT).show();
+                }
+                AnunciosAdpter adapter = new AnunciosAdpter(TelaBusca.this, filteredList);
                 TelaBusca.this.anunciosView.setAdapter(adapter);
             }
             else
@@ -215,6 +230,7 @@ class AnunciosAdpter extends ArrayAdapter<Anuncio> {
 
     private Context context;
     private List<Anuncio> anuncios = null;
+    private Anuncio anuncioSelecionado;
 
     public AnunciosAdpter(Context context, List<Anuncio> anuncios) {
         super(context,0, anuncios);
@@ -224,20 +240,24 @@ class AnunciosAdpter extends ArrayAdapter<Anuncio> {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        Anuncio anuncio = anuncios.get(position);
+        anuncioSelecionado = anuncios.get(position);
 
         if(view == null)
             view = LayoutInflater.from(context).inflate(R.layout.list_layout, null);
-
         TextView textViewNomeZombie = (TextView) view.findViewById(R.id.textTituloList);
-        textViewNomeZombie.setText(anuncio.getNomeDoLivro());
-
+        textViewNomeZombie.setText(anuncioSelecionado.getNomeDoLivro());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SelecaoBusca.class);
+                EventBus.getDefault().postSticky(anuncioSelecionado);
+                context.startActivity(intent);
+            }
+        });
         TextView textViewIdade = (TextView)view.findViewById(R.id.textAutorList);
-        textViewIdade.setText(anuncio.getAutor());
+        textViewIdade.setText(anuncioSelecionado.getAutor());
         return view;
     }
-
-
 }
 
 
