@@ -1,10 +1,17 @@
 package com.example.ftfnunes.booknet;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -19,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
@@ -28,7 +36,12 @@ import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +52,11 @@ public class telaAnuncio extends AppCompatActivity
 
     private EditText nomeLivroAnuncio, autorLivroAnuncio, generoLivroAnuncio, edicaoLivroAnuncio, descLivroAnuncio;
     private Usuario usuario;
+    protected Button tirarFoto, escolherFoto;
+    protected ImageView img;
+    protected Bitmap bp;
+    private Uri mCropImageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +79,17 @@ public class telaAnuncio extends AppCompatActivity
             }
         });
 
+        escolherFoto = (Button) findViewById(R.id.botaoEscolherFoto);
+        escolherFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                carregaFoto();
+            }
+
+        });
+
+        img = (ImageView) findViewById(R.id.previewFotoAnuncio);
+
         nomeLivroAnuncio = (EditText) findViewById(R.id.nomeLivroAnuncio);
         autorLivroAnuncio = (EditText) findViewById(R.id.autorLivroAnuncio);
         generoLivroAnuncio = (EditText) findViewById(R.id.generoLivroAnuncio);
@@ -76,6 +105,40 @@ public class telaAnuncio extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         usuario = (Usuario) EventBus.getDefault().getStickyEvent(Usuario.class);
+    }
+
+    protected void carregaFoto(){
+        CropImage.startPickImageActivity(this);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+       /* Repositório utilizado: https://github.com/ArthurHub/Android-Image-Cropper*/
+
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
+
+            mCropImageUri = imageUri;
+            startCropImageActivity(imageUri);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            try {
+                bp = MediaStore.Images.Media.getBitmap(getContentResolver(), result.getUri());
+                img.setImageBitmap(bp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void startCropImageActivity(Uri imageUri) {
+       CropImage.activity(imageUri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setMultiTouchEnabled(true)
+                .start(this);
     }
 
     @Override

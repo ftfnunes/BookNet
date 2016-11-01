@@ -58,7 +58,7 @@ public class telaLogin extends Activity {
         if(usuario != null){
             Intent it = new Intent(telaLogin.this, telaInicio.class);
             de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
-            startActivityForResult(it, 0);
+            startActivity(it);
         }
         else {
             Toast.makeText(telaLogin.this,"Usuário não encontrado.", Toast.LENGTH_LONG).show();
