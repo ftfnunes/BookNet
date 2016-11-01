@@ -18,8 +18,8 @@ import java.util.List;
 
 public class EmprestimosAdapter extends ArrayAdapter<Emprestimo> {
 
-    private Context context;
-    private List<Emprestimo> emprestimos = null;
+    protected Context context;
+    protected List<Emprestimo> emprestimos = null;
 
     public EmprestimosAdapter(Context context, List<Emprestimo> emprestimos) {
         super(context,0, emprestimos);
