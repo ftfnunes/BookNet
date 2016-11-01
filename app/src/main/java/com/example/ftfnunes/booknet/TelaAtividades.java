@@ -13,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,10 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
@@ -46,7 +42,6 @@ import de.greenrobot.event.EventBus;
 
 public class TelaAtividades extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int APROVAR_SOLICITACAO = 1;
     Usuario usuario;
     EmprestimosAdapter soliciteiAdapter;
     EmprestimosAdapter disponibilizeiAdapter;
@@ -82,35 +77,9 @@ public class TelaAtividades extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getText().toString() == "Solicitei"){
                     listView.setAdapter(soliciteiAdapter);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Emprestimo emprestimo = (Emprestimo) parent.getItemAtPosition(position);
-                            if(emprestimo.getStatus().equals("Emprestado")) {
-
-                            }
-                            else{
-                                Toast.makeText(TelaAtividades.this, "nofa, eh muito forte2", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
                 }
                 else
                     listView.setAdapter(disponibilizeiAdapter);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Emprestimo emprestimo = (Emprestimo) parent.getItemAtPosition(position);
-                            if(emprestimo.getStatus().equals("Pendente")) {
-                                EventBus.getDefault().postSticky(emprestimo);
-                                Intent intent = new Intent(TelaAtividades.this, AprovacaoDeSolicitacao.class);
-                                TelaAtividades.this.startActivityForResult(intent, APROVAR_SOLICITACAO);
-                            }
-                            else{
-                                Toast.makeText(TelaAtividades.this, "nofa, eh muito forte", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
             }
 
             @Override

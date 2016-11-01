@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -58,16 +57,6 @@ public class TelaBusca extends AppCompatActivity
         anunciosView = (ListView)findViewById(R.id.anunciosList);
 
         usuario = EventBus.getDefault().getStickyEvent(Usuario.class);
-
-        anunciosView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Anuncio anuncio = (Anuncio)parent.getItemAtPosition(position);
-                Intent intent = new Intent(TelaBusca.this, SelecaoBusca.class);
-                EventBus.getDefault().postSticky(anuncio);
-                startActivity(intent);
-            }
-        });
 
         ImageButton searchButton = (ImageButton)findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +246,14 @@ class AnunciosAdpter extends ArrayAdapter<Anuncio> {
             view = LayoutInflater.from(context).inflate(R.layout.list_layout, null);
         TextView textViewNomeZombie = (TextView) view.findViewById(R.id.textTituloList);
         textViewNomeZombie.setText(anuncioSelecionado.getNomeDoLivro());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SelecaoBusca.class);
+                EventBus.getDefault().postSticky(anuncioSelecionado);
+                context.startActivity(intent);
+            }
+        });
         TextView textViewIdade = (TextView)view.findViewById(R.id.textAutorList);
         textViewIdade.setText(anuncioSelecionado.getAutor());
         return view;

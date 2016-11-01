@@ -16,7 +16,4 @@
     <string name="title_activity_tela_filtro">TelaFiltro</string>
     <string name="title_activity_aprovacao_de_solicitacao">AprovacaoDeSolicitacao</string>
     <string name="title_activity_livro_emprestado">LivroEmprestado</string>
-    <string name="title_activity_tela_status_emprestimo">telaStatusEmprestimo</string>
-    <string name="title_activity_status_emprestimo">StatusEmprestimo</string>
-    <string name="title_activity_tela_avaliacao">TelaAvaliacao</string>
 </resources>

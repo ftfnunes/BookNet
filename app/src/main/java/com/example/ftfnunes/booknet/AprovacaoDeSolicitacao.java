@@ -1,13 +1,9 @@
 package com.example.ftfnunes.booknet;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,23 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
-import com.appspot.myapplicationid.bookNetBackend.model.Emprestimo;
-import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.json.gson.GsonFactory;
-
-import de.greenrobot.event.EventBus;
 
 public class AprovacaoDeSolicitacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    Usuario usuario;
-    Emprestimo emprestimo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,41 +23,6 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
         setContentView(R.layout.activity_aprovacao_de_solicitacao);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        usuario = EventBus.getDefault().getStickyEvent(Usuario.class);
-        emprestimo = EventBus.getDefault().getStickyEvent(Emprestimo.class);
-
-        TextView tituloText = (TextView) findViewById(R.id.TituloText);
-        TextView autorText = (TextView) findViewById(R.id.textAutor);
-        TextView edText = (TextView) findViewById(R.id.textGenero);
-        TextView userText = (TextView) findViewById(R.id.textNomeUsuario);
-        TextView telText = (TextView) findViewById(R.id.textTelefone);
-
-        tituloText.setText(emprestimo.getAnuncio().getNomeDoLivro());
-        autorText.setText(emprestimo.getAnuncio().getAutor());
-        edText.setText(emprestimo.getAnuncio().getEdicao() + " Edicao");
-        userText.setText(emprestimo.getInteressado().getUserName());
-        telText.setText("3212344");
-        /*Trocar para campo telefone quando for adicionado a entidade Usuario*/
-        Button aceitarButton = (Button)findViewById(R.id.buttonAceitar);
-        Button recusarButton = (Button)findViewById(R.id.buttonRecusar);
-
-
-        aceitarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emprestimo.setStatus("Emprestado");
-                new SalvaEmprestimoAsync(AprovacaoDeSolicitacao.this).execute(emprestimo);
-            }
-        });
-
-        recusarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emprestimo.setStatus("Recusado");
-                new SalvaEmprestimoAsync(AprovacaoDeSolicitacao.this).execute(emprestimo);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,53 +94,5 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private class SalvaEmprestimoAsync extends AsyncTask<Emprestimo, Void, Emprestimo> {
-        Context context;
-        private ProgressDialog pd;
-
-
-
-        public SalvaEmprestimoAsync(Context context) {
-            this.context = context;
-        }
-
-        protected void onPreExecute(){
-            super.onPreExecute();
-            pd = new ProgressDialog(context);
-            pd.setMessage("Salvando Solicitacao..."); /* Tal mensagem é exibida enquanto a busca no banco de dados é realizada.*/
-            pd.show();
-        }
-
-
-        protected Emprestimo doInBackground(Emprestimo... emprestimo) {
-            /* São criadas Colection de avaliações e correções para armazenar o resultado das buscas n banco de dados.*/
-
-            /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
-            try{
-                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null)
-                        .setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
-                BookNetBackend service =  builder.build();
-
-                return service.addEmprestimo(emprestimo[0]).execute();
-            }
-            catch(Exception ex){
-                /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
-                Log.d("Erro ao salvar", ex.getMessage(), ex);
-            }
-
-            return null;
-
-        }
-
-        @Override
-        protected void onPostExecute(Emprestimo emprestimo) {
-            Toast.makeText(getApplicationContext(),"Solicitacao de Emprestimo Salva",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            finish();
-            pd.dismiss();
-
-        }
     }
 }

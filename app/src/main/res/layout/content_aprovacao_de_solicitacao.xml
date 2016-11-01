@@ -110,9 +110,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar2"
-        android:isIndicator="true"
-        android:focusable="false"
-        android:clickable="false"
         android:layout_below="@+id/imageUsuario"
         android:layout_centerHorizontal="true" />
 
