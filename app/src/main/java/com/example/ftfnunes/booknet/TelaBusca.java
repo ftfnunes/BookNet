@@ -220,7 +220,7 @@ public class TelaBusca extends AppCompatActivity
             if(anuncios != null) {
                 ArrayList<Anuncio> filteredList = new ArrayList<>();
                 for(Anuncio anuncio : anuncios){
-                    if(!anuncio.getAnunciante().getUserName().equals(usuario.getUserName())){
+                    if(!anuncio.getAnunciante().getUserName().equals(usuario.getUserName()) && anuncio.getValid()){
                         filteredList.add(anuncio);
                     }
                 }

@@ -75,6 +75,7 @@ public class telaAnuncio extends AppCompatActivity
                 anuncio.setEdicao(Integer.parseInt(edicaoLivroAnuncio.getText().toString()));
                 anuncio.setDescricao(descLivroAnuncio.getText().toString());
                 anuncio.setAnunciante(usuario);
+                anuncio.setValid(true);
                 new SalvaAnuncioAsync(telaAnuncio.this).execute(anuncio);
             }
         });

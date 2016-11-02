@@ -20,6 +20,17 @@ public class Anuncio {
     @Index String genero;
     String descricao;
     @Index Usuario anunciante;
+    boolean IsValid;
+
+
+
+    public boolean isValid() {
+        return IsValid;
+    }
+
+    public void setValid(boolean valid) {
+        IsValid = valid;
+    }
 
 
     public Long getId() {

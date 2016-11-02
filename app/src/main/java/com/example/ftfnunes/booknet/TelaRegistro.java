@@ -47,7 +47,7 @@ public class TelaRegistro extends AppCompatActivity {
                 Usuario usuario = new Usuario();
                 usuario.setNome(nomeRegistro.getText().toString());
                 usuario.setUserName(loginRegistro.getText().toString());
-                usuario.setAvaliacao(3);
+                usuario.setAvaliacao(0);
                 usuario.setEmprestimosFeitos(0);
 
                 new SalvaUsuarioAsync(TelaRegistro.this).execute(usuario);

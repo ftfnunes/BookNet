@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
+import com.appspot.myapplicationid.bookNetBackend.model.Anuncio;
 import com.appspot.myapplicationid.bookNetBackend.model.Emprestimo;
 import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -183,7 +184,7 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
                 BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null)
                         .setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
                 BookNetBackend service =  builder.build();
-
+                emprestimo[0].getAnuncio().setValid(false);
                 return service.addEmprestimo(emprestimo[0]).execute();
             }
             catch(Exception ex){
@@ -197,6 +198,52 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Emprestimo emprestimo) {
+            pd.dismiss();
+            new SalvaAnuncioAsync(AprovacaoDeSolicitacao.this).execute(emprestimo.getAnuncio());
+        }
+    }
+
+    private class SalvaAnuncioAsync extends AsyncTask<Anuncio, Void, Anuncio> {
+        Context context;
+        private ProgressDialog pd;
+
+
+
+        public SalvaAnuncioAsync(Context context) {
+            this.context = context;
+        }
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("Buscando Avaliacões..."); /* Tal mensagem é exibida enquanto a busca no banco de dados é realizada.*/
+            pd.show();
+        }
+
+
+        protected Anuncio doInBackground(Anuncio... anuncio) {
+            /* São criadas Colection de avaliações e correções para armazenar o resultado das buscas n banco de dados.*/
+
+            /* Uma lista de objetos é criada para aramazenar os dois conjuntos de avaliações e correções. */
+            try{
+                BookNetBackend.Builder builder = new BookNetBackend.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+                builder.setRootUrl("https://booknet-148017.appspot.com/_ah/api/");
+                BookNetBackend service = builder.build();
+
+                return service.addAnuncio(anuncio[0]).execute();
+            }
+            catch(Exception ex){
+                /* Caso a busca de errado, uma mensagem de erro é exibida na tela do dispositivo.*/
+                Log.d("Erro ao salvar", ex.getMessage(), ex);
+            }
+
+            return null;
+
+        }
+
+
+        @Override
+        protected void onPostExecute(Anuncio anuncio) {
             Toast.makeText(getApplicationContext(),"Solicitacao de Emprestimo Salva",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.putExtra("RESULT_AP", emprestimo.getStatus() == "Recusado" ? "Recusado" : "Aprovado");

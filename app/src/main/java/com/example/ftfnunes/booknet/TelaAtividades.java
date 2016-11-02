@@ -47,6 +47,7 @@ import de.greenrobot.event.EventBus;
 public class TelaAtividades extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int APROVAR_SOLICITACAO = 1;
+    private static final int GET_AVAL = 2;
     Usuario usuario;
     EmprestimosAdapter soliciteiAdapter;
     EmprestimosAdapter disponibilizeiAdapter;
@@ -73,6 +74,22 @@ public class TelaAtividades extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         listView = (ListView)findViewById(R.id.atList);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Emprestimo emprestimo = (Emprestimo) parent.getItemAtPosition(position);
+                if(emprestimo.getStatus().equals("Emprestado")) {
+                    Intent intent = new Intent(TelaAtividades.this, StatusEmprestimo.class);
+                    EventBus.getDefault().postSticky(emprestimo);
+                    startActivity(intent);
+                }
+                else if(emprestimo.getStatus().equals("Finalizado")){
+                    Intent intent = new Intent(TelaAtividades.this, TelaAvaliacao.class);
+                    EventBus.getDefault().postSticky(emprestimo.getAnunciante());
+                    startActivityForResult(intent, GET_AVAL);
+                }
+            }
+        });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Solicitei"));
@@ -88,30 +105,37 @@ public class TelaAtividades extends AppCompatActivity
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Emprestimo emprestimo = (Emprestimo) parent.getItemAtPosition(position);
                             if(emprestimo.getStatus().equals("Emprestado")) {
-
+                                Intent intent = new Intent(TelaAtividades.this, StatusEmprestimo.class);
+                                EventBus.getDefault().postSticky(emprestimo);
+                                startActivity(intent);
                             }
-                            else{
-                                Toast.makeText(TelaAtividades.this, "nofa, eh muito forte2", Toast.LENGTH_SHORT).show();
+                            else if(emprestimo.getStatus().equals("Finalizado")){
+                                Intent intent = new Intent(TelaAtividades.this, TelaAvaliacao.class);
+                                EventBus.getDefault().postSticky(emprestimo.getAnunciante());
+                                startActivityForResult(intent, GET_AVAL);
                             }
                         }
                     });
                 }
-                else
+                else {
                     listView.setAdapter(disponibilizeiAdapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Emprestimo emprestimo = (Emprestimo) parent.getItemAtPosition(position);
-                            if(emprestimo.getStatus().equals("Pendente")) {
+                            if (emprestimo.getStatus().equals("Pendente")) {
                                 EventBus.getDefault().postSticky(emprestimo);
                                 Intent intent = new Intent(TelaAtividades.this, AprovacaoDeSolicitacao.class);
                                 TelaAtividades.this.startActivityForResult(intent, APROVAR_SOLICITACAO);
+                            } else if(emprestimo.getStatus().equals("Emprestado")){
+                                EventBus.getDefault().postSticky(emprestimo);
+                                Intent intent = new Intent(TelaAtividades.this, LivroEmprestado.class);
+                                startActivity(intent);
                             }
-                            else{
-                                Toast.makeText(TelaAtividades.this, "nofa, eh muito forte", Toast.LENGTH_SHORT).show();
-                            }
+
                         }
                     });
+                }
             }
 
             @Override
@@ -193,12 +217,16 @@ public class TelaAtividades extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data.getStringExtra("RESULT_AP").equals("Aprovado")){
+        if(requestCode == GET_AVAL && resultCode == RESULT_OK){
+            EventBus.getDefault().postSticky(usuario);
+        }
+        else if (resultCode == RESULT_OK && data.getStringExtra("RESULT_AP").equals("Aprovado") && requestCode == APROVAR_SOLICITACAO){
             Emprestimo resultEmprestimo = EventBus.getDefault().removeStickyEvent(Emprestimo.class);
+            Long id1, id2;
             for (Emprestimo emprestimo : disponibilizados) {
-                if (emprestimo.getAnuncio().getId() == resultEmprestimo.getAnuncio().getId() && emprestimo.getId() != resultEmprestimo.getId()){
-                    //emprestimo.setStatus("Recusado");
-                    //new SalvaEmprestimoAsync(this).execute(emprestimo);
+                if (emprestimo.getAnuncio().equals(resultEmprestimo.getAnuncio()) && !emprestimo.getId().equals(resultEmprestimo.getId())){
+                    emprestimo.setStatus("Recusado");
+                    new SalvaEmprestimoAsync(this).execute(emprestimo);
                 }
             }
         }

@@ -13,9 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.appspot.myapplicationid.bookNetBackend.model.Emprestimo;
+
+import de.greenrobot.event.EventBus;
 
 public class StatusEmprestimo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Emprestimo emprestimo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,24 @@ public class StatusEmprestimo extends AppCompatActivity
         setContentView(R.layout.activity_status_emprestimo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        emprestimo = EventBus.getDefault().removeStickyEvent(Emprestimo.class);
+
+        RatingBar rb = (RatingBar)findViewById(R.id.ratingBar2);
+        TextView tituloText = (TextView) findViewById(R.id.TituloText);
+        TextView autorText = (TextView) findViewById(R.id.textAutor);
+        TextView edText = (TextView) findViewById(R.id.textGenero);
+        TextView userText = (TextView) findViewById(R.id.textNomeUsuario);
+        TextView telText = (TextView) findViewById(R.id.textTelefone);
+        TextView statusText = (TextView)findViewById(R.id.textStatus);
+
+        rb.setRating(emprestimo.getAnunciante().getAvaliacao());
+        statusText.setText(emprestimo.getStatus());
+        tituloText.setText(emprestimo.getAnuncio().getNomeDoLivro());
+        autorText.setText(emprestimo.getAnuncio().getAutor());
+        edText.setText(emprestimo.getAnuncio().getEdicao() + " Edicao");
+        userText.setText(emprestimo.getInteressado().getUserName());
+        telText.setText("3212344");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

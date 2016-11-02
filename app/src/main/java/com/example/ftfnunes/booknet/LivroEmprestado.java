@@ -1,6 +1,7 @@
 package com.example.ftfnunes.booknet;
 
 import android.app.ProgressDialog;
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import de.greenrobot.event.EventBus;
 public class LivroEmprestado extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int GET_AVAL = 1;
     Usuario usuario;
     Emprestimo emprestimo;
 
@@ -64,15 +66,9 @@ public class LivroEmprestado extends AppCompatActivity
             public void onClick(View v) {
                 emprestimo.setStatus("Finalizado");
                 new SalvaEmprestimoAsync(LivroEmprestado.this).execute(emprestimo);
-            }
-        });
-
-        Button buttonAceitar = (Button) findViewById(R.id.buttonAceitar);
-        buttonAceitar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent it = new Intent(LivroEmprestado.this, TelaAvaliacao.class);
-                startActivity(it);
+                EventBus.getDefault().postSticky(emprestimo.getInteressado());
+                startActivityForResult(it, GET_AVAL);
             }
         });
 
@@ -84,6 +80,13 @@ public class LivroEmprestado extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        EventBus.getDefault().postSticky(usuario);
     }
 
     @Override
