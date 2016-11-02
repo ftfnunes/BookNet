@@ -22,6 +22,14 @@ public class Anuncio {
     @Index Usuario anunciante;
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Usuario getAnunciante() {
         return anunciante;
     }
