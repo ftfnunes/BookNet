@@ -67,6 +67,15 @@ public class LivroEmprestado extends AppCompatActivity
             }
         });
 
+        Button buttonAceitar = (Button) findViewById(R.id.buttonAceitar);
+        buttonAceitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(LivroEmprestado.this, TelaAvaliacao.class);
+                startActivity(it);
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
