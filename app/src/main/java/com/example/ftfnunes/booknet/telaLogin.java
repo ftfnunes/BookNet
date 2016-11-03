@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.appspot.myapplicationid.bookNetBackend.BookNetBackend;
@@ -29,7 +30,8 @@ import java.util.concurrent.ExecutionException;
 
 public class telaLogin extends Activity {
     private EditText campoLogin, campoSenha;
-    Button botaoLogin;
+    private Button botaoLogin;
+    private ImageView imagemLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,10 @@ public class telaLogin extends Activity {
                 new RecuperaLoginAsync(telaLogin.this).execute(campoLogin.getText().toString());
             }
         });
+
+        imagemLogin = (ImageView) findViewById(R.id.imagemLogin);
+        imagemLogin.setVisibility(View.VISIBLE);
+
     }
 
     public void avaliaLogin(Usuario usuario){

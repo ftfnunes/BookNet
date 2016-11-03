@@ -63,15 +63,18 @@
         android:layout_alignParentEnd="true"
         android:onClick="registro" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_chrome_reader_mode_black_24dp"
         android:id="@+id/imagemLogin"
-        android:visibility="visible"
-        android:layout_above="@+id/campoLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/campoLogin"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        app:srcCompat="@drawable/ic_chrome_reader_mode_black_24dp"
+        android:tint="@color/colorPrimaryDark"
+        />
 
 </RelativeLayout>

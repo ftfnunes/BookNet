@@ -15,6 +15,9 @@ public class MainActivity extends Activity {
         Button botaoTeste = (Button) findViewById(R.id.botaoTeste);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent it = new Intent(MainActivity.this, telaLogin.class);
+        startActivity(it);
     }
 
     public void noClick(View v) {
