@@ -46,6 +46,7 @@ public class TelaBusca extends AppCompatActivity
     EditText searchText;
     Usuario usuario;
     public static int GET_FILTER = 1;
+    private TextView nomeUsuarioHeader, emailUsuarioHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,28 +119,27 @@ public class TelaBusca extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tela_busca, menu);
+        getMenuInflater().inflate(R.menu.menu_lateral, menu);
+        nomeUsuarioHeader = (TextView) findViewById(R.id.nomeUsuarioHeader);
+        nomeUsuarioHeader.setText(usuario.getNome());
+        emailUsuarioHeader = (TextView) findViewById(R.id.emailUsuarioHeader);
+        emailUsuarioHeader.setText(usuario.getUserName());
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected (MenuItem item){
+    public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -153,9 +153,8 @@ public class TelaBusca extends AppCompatActivity
         } else if (id == R.id.men_lat_myprof) {
 
         } else if (id == R.id.men_lat_not) {
-
-        } else if (id == R.id.men_lat_solic) {
-            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
+            Intent it = new Intent(this, TelaAtividades.class);
+            de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
             startActivity(it);
         } else if (id == R.id.men_lat_sair) {
             Intent it = new Intent(this, telaLogin.class);

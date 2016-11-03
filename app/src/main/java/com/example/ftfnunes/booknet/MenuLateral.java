@@ -83,9 +83,6 @@ public class MenuLateral extends AppCompatActivity
 
         } else if (id == R.id.men_lat_not) {
 
-        } else if (id == R.id.men_lat_solic) {
-            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
-            startActivity(it);
         } else if (id == R.id.men_lat_sair) {
             Intent it = new Intent(this, telaLogin.class);
             startActivity(it);

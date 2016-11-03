@@ -37,6 +37,7 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
 
     Usuario usuario;
     Emprestimo emprestimo;
+    private TextView nomeUsuarioHeader, emailUsuarioHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,11 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.aprovacao_de_solicitacao, menu);
+        getMenuInflater().inflate(R.menu.menu_lateral, menu);
+        nomeUsuarioHeader = (TextView) findViewById(R.id.nomeUsuarioHeader);
+        nomeUsuarioHeader.setText(usuario.getNome());
+        emailUsuarioHeader = (TextView) findViewById(R.id.emailUsuarioHeader);
+        emailUsuarioHeader.setText(usuario.getUserName());
         return true;
     }
 
@@ -119,11 +124,6 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,9 +144,8 @@ public class AprovacaoDeSolicitacao extends AppCompatActivity
         } else if (id == R.id.men_lat_myprof) {
 
         } else if (id == R.id.men_lat_not) {
-
-        } else if (id == R.id.men_lat_solic) {
-            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
+            Intent it = new Intent(this, TelaAtividades.class);
+            de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
             startActivity(it);
         } else if (id == R.id.men_lat_sair) {
             Intent it = new Intent(this, telaLogin.class);

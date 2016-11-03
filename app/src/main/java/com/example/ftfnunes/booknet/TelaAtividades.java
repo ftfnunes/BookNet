@@ -42,17 +42,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import com.appspot.myapplicationid.bookNetBackend.model.Usuario;
+
 import de.greenrobot.event.EventBus;
 
 public class TelaAtividades extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int APROVAR_SOLICITACAO = 1;
     private static final int GET_AVAL = 2;
-    Usuario usuario;
     EmprestimosAdapter soliciteiAdapter;
     EmprestimosAdapter disponibilizeiAdapter;
     ListView listView;
     ArrayList<Emprestimo> disponibilizados;
+    private Usuario usuario;
+    private TextView nomeUsuarioHeader, emailUsuarioHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class TelaAtividades extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         listView = (ListView)findViewById(R.id.atList);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -165,7 +169,11 @@ public class TelaAtividades extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tela_atividades, menu);
+        getMenuInflater().inflate(R.menu.menu_lateral, menu);
+        nomeUsuarioHeader = (TextView) findViewById(R.id.nomeUsuarioHeader);
+        nomeUsuarioHeader.setText(usuario.getNome());
+        emailUsuarioHeader = (TextView) findViewById(R.id.emailUsuarioHeader);
+        emailUsuarioHeader.setText(usuario.getUserName());
         return true;
     }
 
@@ -176,10 +184,6 @@ public class TelaAtividades extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -200,9 +204,8 @@ public class TelaAtividades extends AppCompatActivity
         } else if (id == R.id.men_lat_myprof) {
 
         } else if (id == R.id.men_lat_not) {
-
-        } else if (id == R.id.men_lat_solic) {
-            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
+            Intent it = new Intent(this, TelaAtividades.class);
+            de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
             startActivity(it);
         } else if (id == R.id.men_lat_sair) {
             Intent it = new Intent(this, telaLogin.class);

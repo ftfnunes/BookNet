@@ -23,7 +23,7 @@ public class telaInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView nomeUsuarioHeader, emailUsuarioHeader;
-    Usuario usuario;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class telaInicio extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
@@ -94,9 +95,6 @@ public class telaInicio extends AppCompatActivity
         } else if (id == R.id.men_lat_not) {
             Intent it = new Intent(this, TelaAtividades.class);
             de.greenrobot.event.EventBus.getDefault().postSticky(usuario);
-            startActivity(it);
-        } else if (id == R.id.men_lat_solic) {
-            Intent it = new Intent(this, AprovacaoDeSolicitacao.class);
             startActivity(it);
         } else if (id == R.id.men_lat_sair) {
             Intent it = new Intent(this, telaLogin.class);

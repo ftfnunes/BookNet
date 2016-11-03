@@ -113,9 +113,10 @@ public class TelaRegistro extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Usuario usuario) {
-            Toast.makeText(getApplicationContext(),"Anuncio Salvo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Usuário Salvo",Toast.LENGTH_SHORT).show();
             pd.dismiss();
-
+            Intent it = new Intent(TelaRegistro.this, telaLogin.class);
+            startActivity(it);
         }
     }
 
